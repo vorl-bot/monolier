@@ -4,6 +4,8 @@ import discord
 from dotenv import load_dotenv
 import os
 load_dotenv()
+import random
+import gacha
 
 PREFIX = os.environ['PREFIX']
 TOKEN = os.environ['TOKEN']
@@ -25,6 +27,11 @@ async def on_message(message):
     if message.content.startswith(f'{PREFIX}hello'):
         await message.channel.send('Hello!')
 
+      #가챠
+    if message.content.startswith(f'{PREFIX}가챠'):
+        gacha_result = gacha.getGacha()
+        gacha_message = '<'+gacha_result+'>이(가) 나왔다!'
+        await message.channel.send(gacha_message, reference=message)
 
 try:
     client.run(TOKEN)
